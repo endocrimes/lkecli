@@ -6,6 +6,21 @@ A Lightweight convenience CLI for interacting with Linode Kubernetes Engine
 It currently only works on linux/macos, but windows support would be a welcome
 addition.
 
+## Installation
+
+### Brew
+
+```console
+$ brew tap endocrimes/lkecli https://github.com/endocrimes/lkecli
+$ brew install lkecli
+```
+
+### Go
+
+```console
+$ go install github.com/endocrimes/lkecli/cmd/lkecli@latest
+```
+
 ## Usage
 
 If you are authenticated with `linode-cli`, `lkecli` will automatically re-use
