@@ -21,6 +21,24 @@ builds:
       - darwin
     main: ./cmd/lkecli
 
+brews:
+  - name: lkecli
+    dependencies:
+      - name: kubectl
+    directory: Formula
+    description: "LKE Helper CLI"
+    repository:
+      owner: endocrimes
+      name: lkecli
+      branch: brew-releases/{{ .Version }}
+      token: "{{ .Env.GITHUB_TOKEN }}"
+      pull_request:
+        enabled: true
+        base:
+          owner: endocrimes
+          name: lkecli
+          branch: main
+
 archives:
   - format: tar.gz
     # this name template makes the OS and Arch compatible with the results of `uname`.
