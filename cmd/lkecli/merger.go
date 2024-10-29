@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 )
 
-func mergeConfigs(localKubeconfigPath string, newCfg []byte) ([]byte, error) {
+func mergeConfigs(localKubeconfigPath string, newCfg []byte, contextName string) ([]byte, error) {
 	// Create a temporary kubeconfig to store the config
 	file, err := os.CreateTemp(os.TempDir(), "lke-temp-*")
 	if err != nil {
@@ -16,6 +17,26 @@ func mergeConfigs(localKubeconfigPath string, newCfg []byte) ([]byte, error) {
 
 	if writeErr := writeConfig(file.Name(), newCfg); writeErr != nil {
 		return nil, writeErr
+	}
+
+	if contextName != "" {
+		currentCtxCmd := exec.Command("kubectl", "config", "current-context")
+		currentCtxCmd.Env = append(os.Environ(), fmt.Sprintf("KUBECONFIG=%s", file.Name()))
+
+		currentCtx, err := currentCtxCmd.Output()
+		if err != nil {
+			return nil, fmt.Errorf("could not find current context: %s", err)
+		}
+
+		currentCtxString := strings.TrimSuffix(string(currentCtx), "\n")
+
+		renameCtxCmd := exec.Command("kubectl", "config", "rename-context", currentCtxString, contextName)
+		renameCtxCmd.Env = append(os.Environ(), fmt.Sprintf("KUBECONFIG=%s", file.Name()))
+
+		_, err = renameCtxCmd.Output()
+		if err != nil {
+			return nil, fmt.Errorf("could not rename current context: %s", err)
+		}
 	}
 
 	fmt.Printf("Merged with main kubernetes config: %s\n", localKubeconfigPath)
