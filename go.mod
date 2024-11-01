@@ -3,7 +3,7 @@ module github.com/endocrimes/lkecli
 go 1.22.7
 
 require (
-	github.com/alecthomas/kong v1.2.1
+	github.com/alecthomas/kong v1.3.0
 	github.com/bigkevmcd/go-configparser v0.0.0-20240808124832-fc81059ea0bd
 	github.com/linode/linodego v1.42.0
 	golang.org/x/oauth2 v0.23.0
