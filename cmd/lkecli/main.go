@@ -88,6 +88,7 @@ type kubeconfigCmd struct {
 	Cluster string `arg:"cluster" help:"Name of the cluster to fetch the kubeconfig for"`
 	Output  string `name:"output" type:"path" default:"~/.kube/config" help:"Path to save the Kubeconfig to"`
 	Merge   bool   `name:"merge" default:"true" help:"Whether the kubeconfig should merge with an existing one, or overwrite"`
+	Rename  string `name:"rename" default:"" help:"Rename the context in the kubeconfig"`
 }
 
 func (k *kubeconfigCmd) Run(cfg *cfg) error {
@@ -125,7 +126,11 @@ func (k *kubeconfigCmd) Run(cfg *cfg) error {
 		return err
 	}
 
-	newCfg, err := mergeConfigs(k.Output, data)
+	contextName := cluster.Label
+	if k.Rename != "" {
+		contextName = k.Rename
+	}
+	newCfg, err := mergeConfigs(k.Output, data, contextName)
 	if err != nil {
 		return err
 	}
@@ -136,7 +141,7 @@ func (k *kubeconfigCmd) Run(cfg *cfg) error {
 	}
 
 	fmt.Print("\nAccess your cluster with:\n")
-	fmt.Printf("kubectl config use-context %s\n", fmt.Sprintf("lke%d", cluster.ID))
+	fmt.Printf("kubectl config use-context %s\n", contextName)
 	fmt.Println("kubectl get node")
 
 	return nil
