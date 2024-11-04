@@ -126,11 +126,9 @@ func (k *kubeconfigCmd) Run(cfg *cfg) error {
 		return err
 	}
 
-	var contextName string
+	contextName := cluster.Label
 	if k.Rename != "" {
 		contextName = k.Rename
-	} else {
-		contextName = fmt.Sprintf("%s-ctx", cluster.Label)
 	}
 	newCfg, err := mergeConfigs(k.Output, data, contextName)
 	if err != nil {
