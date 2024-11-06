@@ -5,22 +5,22 @@
 class Lkecli < Formula
   desc "LKE Helper CLI"
   homepage ""
-  version "0.0.1"
+  version "0.0.2-beta.3"
 
   depends_on "kubectl"
 
   on_macos do
     on_intel do
-      url "https://github.com/endocrimes/lkecli/releases/download/v0.0.1/lkecli_Darwin_x86_64.tar.gz"
-      sha256 "75fd08c53bb824aa103eaf4848ebad50cae3cebeed0454c2ba1d08a51ba7c722"
+      url "https://github.com/endocrimes/lkecli/releases/download/v0.0.2-beta.3/lkecli_Darwin_x86_64.tar.gz"
+      sha256 "0e50eb854e166b139bb6b30fd443f5c04a831e1a7c0270e9f2ff85acf2f8c854"
 
       def install
         bin.install "lkecli"
       end
     end
     on_arm do
-      url "https://github.com/endocrimes/lkecli/releases/download/v0.0.1/lkecli_Darwin_arm64.tar.gz"
-      sha256 "e69aea3ae93c0d7f0d17b3e6a4704b90315ff2da5d35c8f34eb5071cd205735f"
+      url "https://github.com/endocrimes/lkecli/releases/download/v0.0.2-beta.3/lkecli_Darwin_arm64.tar.gz"
+      sha256 "c068e333d6cc56c99ec2fff64aa778b812b2c8bbc130898c598741edf149a7e3"
 
       def install
         bin.install "lkecli"
@@ -31,8 +31,8 @@ class Lkecli < Formula
   on_linux do
     on_intel do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/endocrimes/lkecli/releases/download/v0.0.1/lkecli_Linux_x86_64.tar.gz"
-        sha256 "ee84c62b669cf83d1c193453a2996bd73a5af91efd3ba2cd325f44e88f3802b2"
+        url "https://github.com/endocrimes/lkecli/releases/download/v0.0.2-beta.3/lkecli_Linux_x86_64.tar.gz"
+        sha256 "138bff01bbc1edbddaad9716df0ada8ffa949e845e53b356fb50ff119d2415e7"
 
         def install
           bin.install "lkecli"
@@ -41,8 +41,8 @@ class Lkecli < Formula
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/endocrimes/lkecli/releases/download/v0.0.1/lkecli_Linux_arm64.tar.gz"
-        sha256 "c130de549c610dbd52ea6da845126a6905fc302b20b230e2ec9730105cf50356"
+        url "https://github.com/endocrimes/lkecli/releases/download/v0.0.2-beta.3/lkecli_Linux_arm64.tar.gz"
+        sha256 "b44b5139999b5c8b3214d3116349eb330eb5c13795e8ce35e30eb98439713e98"
 
         def install
           bin.install "lkecli"
