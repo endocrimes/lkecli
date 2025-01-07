@@ -6,7 +6,7 @@ require (
 	github.com/alecthomas/kong v1.4.0
 	github.com/bigkevmcd/go-configparser v0.0.0-20240808124832-fc81059ea0bd
 	github.com/linode/linodego v1.44.1
-	golang.org/x/oauth2 v0.24.0
+	golang.org/x/oauth2 v0.25.0
 )
 
 require (
